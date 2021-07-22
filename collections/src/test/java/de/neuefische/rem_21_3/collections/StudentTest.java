@@ -9,8 +9,8 @@ public class StudentTest {
 
     @Test
     public void studentsAreEqualByName() {
-        Student first = new Student("Klaus");
-        Student second = new Student("Klaus");
+        Student first = new Student(1, "Klaus");
+        Student second = new Student(2, "Klaus");
 
         assertEquals(first, second);
     }

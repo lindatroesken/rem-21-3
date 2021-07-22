@@ -2,34 +2,35 @@ package de.neuefische.rem_21_3.collections;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class StudentDB {
 
 //    private Student[] students;
-    private ArrayList<Student> students;
+    private Map<Integer, Student> students;
 
-    public StudentDB(ArrayList<Student> students) {
+    public StudentDB(Map<Integer, Student> students) {
         this.students = students;
     }
 
-    public ArrayList<Student> list() {
+    public Map<Integer, Student> list() {
         return students;
     }
 
-//    @Override
-//    public String toString() {
-//        String toString = "";
-//        for (int i = 0; i < this.students.length; i++) {
-//            if (i > 0) {
-//                toString += ",";
-//            }
-//
-//            Student student = this.students[i];
-//            toString += student.toString();
-//        }
-//        return toString;
-//    }
+    @Override
+    public String toString() {
+        String toString = "";
+        for (int i = 0; i < this.students.size(); i++) {
+            if (i > 0) {
+                toString += ",";
+            }
+
+            Student student = this.students.get(i);
+            toString += student.toString();
+        }
+        return toString;
+    }
 //
 //    public Student getRandomStudent() {
 //        int maxStudentArrayIndex = this.students.length;

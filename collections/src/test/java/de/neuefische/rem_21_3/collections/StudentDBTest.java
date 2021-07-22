@@ -3,6 +3,8 @@ package de.neuefische.rem_21_3.collections;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +18,7 @@ class StudentDBTest {
         // GIVEN
         // init db with empty array
 //        Student[] students = {  /* students .... */};
-        ArrayList<Student> students = new ArrayList<Student>();
+        Map<Integer, Student> students = new HashMap<>();
         StudentDB studentDB = new StudentDB(students);
 
         // WHEN
@@ -31,15 +33,17 @@ class StudentDBTest {
     public void testSetupDBWithStudentsLength() {
         // GIVEN
         // init db with non empty array
-        Student studentKlaus = new Student("Klaus");
-        Student studentMarie = new Student("Marie");
-        ArrayList<Student> students = new ArrayList<>();
+        Student studentKlaus = new Student(1, "Klaus");
+        System.out.println(studentKlaus);
+        Student studentMarie = new Student(2, "Marie");
+        Map<Integer, Student> mapOfStudents = new HashMap<>();
 
         //diese beiden Zeilen machen das Selbe
-        students.add(studentKlaus);
-        students.add(new Student("Marie"));
+        mapOfStudents.put(studentKlaus.getId(),studentKlaus);
+        mapOfStudents.put(studentMarie.getId(),studentMarie);
 
-        StudentDB studentDB = new StudentDB(students);
+        StudentDB studentDB = new StudentDB(mapOfStudents);
+
 
         // WHEN
         System.out.println(studentDB);
@@ -49,20 +53,24 @@ class StudentDBTest {
         int expectedAMountOfStudentsInDB = 2;
         assertEquals(expectedAMountOfStudentsInDB, actualAmountOfStudents);
     }
-//
-//    @Test
-//    public void testSetupDBWithStudentsEquals() {
-//        // GIVEN
-//        Student[] dbStudents = {new Student("Klaus"), new Student("Marie")};
-//        StudentDB studentDB = new StudentDB(dbStudents);
-//
-//        // WHEN
-//        Student[] actualStudents = studentDB.list();
-//
-//        // THEN
-//        Student[] expectedStudents = {new Student("Klaus"), new Student("Marie")};
-//        assertArrayEquals(expectedStudents, actualStudents);
-//    }
+
+    @Test
+    public void testSetupDBWithStudentsEquals() {
+        // GIVEN
+        Student studentKlaus = new Student(1, "Klaus");
+        Student studentMarie = new Student(2, "Marie");
+       Map<Integer, Student> dbStudents = new HashMap<>();
+       dbStudents.put(studentKlaus.getId(), studentKlaus);
+       dbStudents.put(studentMarie.getId(), studentMarie);
+        StudentDB studentDB = new StudentDB(dbStudents);
+
+        // WHEN
+        String actualStudents = studentDB.list().toString();
+
+        // THEN
+        String expectedStudents = "{1=[id=1, name=Klaus], 2=[id=2, name=Marie]}";
+        assertEquals(expectedStudents, actualStudents);
+    }
 //
 //    @Test
 //    public void testStudentDBWithStudentsToString() {
